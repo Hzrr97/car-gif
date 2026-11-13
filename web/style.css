@@ -1,0 +1,154 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+  background: #0f1115;
+  color: #e6e8ee;
+  min-height: 100vh;
+}
+
+.hidden { display: none !important; }
+.error { color: #ff6b6b; }
+
+button {
+  background: #232836;
+  color: #e6e8ee;
+  border: 1px solid #313848;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+button:hover { background: #2c3345; }
+button:disabled { opacity: 0.45; cursor: default; }
+button.danger { color: #ff8080; border-color: #5a2b2b; }
+button.danger:hover { background: #3a2222; }
+
+input {
+  width: 100%;
+  background: #171a21;
+  border: 1px solid #313848;
+  border-radius: 8px;
+  color: #e6e8ee;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+input:focus { outline: none; border-color: #4f8cff; }
+
+/* 登录 / 注册 */
+#auth-view {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+  background: #171a21;
+  border: 1px solid #262c3a;
+  border-radius: 14px;
+  padding: 32px 28px;
+}
+.auth-card h1 { font-size: 20px; text-align: center; margin-bottom: 22px; }
+.tabs { display: flex; gap: 8px; margin-bottom: 18px; }
+.tabs button { flex: 1; }
+.tabs button.active { background: #4f8cff; border-color: #4f8cff; color: #fff; }
+#auth-form { display: flex; flex-direction: column; gap: 12px; }
+#auth-submit { background: #4f8cff; border-color: #4f8cff; color: #fff; font-weight: 600; }
+#auth-submit:hover { background: #3d7bf0; }
+#auth-error { min-height: 18px; font-size: 13px; text-align: center; }
+
+/* 主界面 */
+#main-view { max-width: 1080px; margin: 0 auto; padding: 24px 20px 60px; }
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+header h1 { font-size: 20px; }
+.user-box { display: flex; align-items: center; gap: 12px; color: #9aa3b5; font-size: 14px; }
+
+.upload-card {
+  background: #171a21;
+  border: 1px solid #262c3a;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 28px;
+}
+#dropzone {
+  border: 2px dashed #3a4256;
+  border-radius: 12px;
+  padding: 34px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+#dropzone:hover, #dropzone.dragover { border-color: #4f8cff; background: #1b2130; }
+.dz-title { font-size: 15px; margin-bottom: 6px; }
+.dz-hint { font-size: 13px; color: #9aa3b5; }
+
+#upload-progress { margin-top: 16px; }
+.bar {
+  height: 8px;
+  background: #232836;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+#bar-fill { height: 100%; width: 0; background: #4f8cff; transition: width 0.15s; }
+#upload-status { font-size: 13px; color: #9aa3b5; }
+
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.list-header h2 { font-size: 16px; }
+
+#file-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  color: #9aa3b5;
+  font-size: 14px;
+}
+.file-card {
+  background: #171a21;
+  border: 1px solid #262c3a;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.preview {
+  height: 160px;
+  background: #0a0c10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.preview img, .preview video { max-width: 100%; max-height: 100%; }
+.file-info { padding: 10px 12px 6px; }
+.file-name {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.file-meta { font-size: 12px; color: #9aa3b5; margin-top: 4px; }
+.file-actions { display: flex; gap: 6px; padding: 8px 12px 12px; }
+.file-actions button { flex: 1; padding: 6px 4px; font-size: 12px; }
+
+#pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 22px;
+  color: #9aa3b5;
+  font-size: 13px;
+}

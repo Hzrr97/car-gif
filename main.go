@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"embed"
+	"io/fs"
 	"log"
 	"net/http"
 	"os"
@@ -11,6 +13,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
+
+//go:embed web
+var webFS embed.FS
 
 func main() {
 	cfg, err := LoadConfig()
@@ -51,22 +56,22 @@ func main() {
 	client.GET("/files", files.ClientList)
 	client.GET("/files/:id/download", files.ClientDownloadURL)
 
-	// sub, err := fs.Sub(webFS, "web")
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// serveFile := func(name, contentType string) gin.HandlerFunc {
-	// 	data, err := fs.ReadFile(sub, name)
-	// 	if err != nil {
-	// 		log.Fatalf("读取嵌入文件 %s 失败: %v", name, err)
-	// 	}
-	// 	return func(c *gin.Context) { c.Data(http.StatusOK, contentType, data) }
-	// }
-	// index := serveFile("index.html", "text/html; charset=utf-8")
-	// r.GET("/", index)
-	// r.GET("/index.html", index)
-	// r.GET("/app.js", serveFile("app.js", "application/javascript; charset=utf-8"))
-	// r.GET("/style.css", serveFile("style.css", "text/css; charset=utf-8"))
+	sub, err := fs.Sub(webFS, "web")
+	if err != nil {
+		log.Fatal(err)
+	}
+	serveFile := func(name, contentType string) gin.HandlerFunc {
+		data, err := fs.ReadFile(sub, name)
+		if err != nil {
+			log.Fatalf("读取嵌入文件 %s 失败: %v", name, err)
+		}
+		return func(c *gin.Context) { c.Data(http.StatusOK, contentType, data) }
+	}
+	index := serveFile("index.html", "text/html; charset=utf-8")
+	r.GET("/", index)
+	r.GET("/index.html", index)
+	r.GET("/app.js", serveFile("app.js", "application/javascript; charset=utf-8"))
+	r.GET("/style.css", serveFile("style.css", "text/css; charset=utf-8"))
 
 	srv := &http.Server{Addr: ":" + cfg.Port, Handler: r}
 	go func() {

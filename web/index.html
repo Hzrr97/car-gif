@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GIF / MP4 文件管理</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="auth-view" class="hidden">
+    <div class="auth-card">
+      <h1>GIF / MP4 文件管理</h1>
+      <div class="tabs">
+        <button id="tab-login" class="active" type="button">登录</button>
+        <button id="tab-register" type="button">注册</button>
+      </div>
+      <form id="auth-form">
+        <input id="username" placeholder="用户名（3-32 个字符）" autocomplete="username" required>
+        <input id="password" type="password" placeholder="密码（至少 8 位）" autocomplete="current-password" required>
+        <button type="submit" id="auth-submit">登录</button>
+        <p id="auth-error" class="error"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="main-view" class="hidden">
+    <header>
+      <h1>GIF / MP4 文件管理</h1>
+      <div class="user-box">
+        <span id="who"></span>
+        <button id="logout" type="button">退出</button>
+      </div>
+    </header>
+
+    <section class="upload-card">
+      <div id="dropzone">
+        <p class="dz-title">点击选择或拖拽文件到此处</p>
+        <p class="dz-hint">支持 GIF / MP4</p>
+        <input type="file" id="file-input" accept=".gif,.mp4,image/gif,video/mp4" hidden>
+      </div>
+      <div id="upload-progress" class="hidden">
+        <div class="bar"><div id="bar-fill"></div></div>
+        <p id="upload-status"></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="list-header">
+        <h2>我的文件</h2>
+        <button id="refresh" type="button">刷新</button>
+      </div>
+      <div id="file-list"></div>
+      <div id="pager"></div>
+    </section>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
